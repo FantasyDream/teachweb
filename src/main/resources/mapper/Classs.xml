@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teachweb.dao.ClasssDao">
+
+    <select id="getClasss" resultType="Classs">
+        select * from classs
+        <where>
+            <if test="id!=0">
+                and id=#{id}
+            </if>
+            <if test="name!=null">
+                and name=#{name}
+            </if>
+            <if test="teacherid!=0">
+                and teacherid=#{teacherid}
+            </if>
+            <if test="invitation!=null">
+                and invitation=#{invitation}
+            </if>
+        </where>
+    </select>
+
+    <select id="listClasss" parameterType="int" resultType="Classs">
+        select * from classs where teacherid=#{0}
+    </select>
+
+    <insert id="addClasss" parameterType="Classs">
+        insert into classs values (null,#{name},#{invitation},#{teacherid})
+    </insert>
+
+    <update id="updateClasss" parameterType="Classs">
+        update classs set name=#{name} where id = #{id}
+    </update>
+
+    <delete id="deleteClasss" parameterType="Classs">
+        delete from classs where id = #{id}
+    </delete>
+
+    <select id="listStudent" parameterType="int" resultType="Student">
+        select s.* from classlist c left outer join student s on c.studentid = s.id where c.classid=#{id}
+    </select>
+
+</mapper>

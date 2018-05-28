@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teachweb.dao.AnswerDao">
+
+    <select id="getAnswer" resultType="Classs">
+        select * from answer
+        <where>
+            <if test="id!=0">
+                and id=#{id}
+            </if>
+            <if test="gradeid!=0">
+                and gradeid=#{gradeid}
+            </if>
+            <if test="subjectid!=0">
+                and subjectid=#{subjectid}
+            </if>
+            <if test="answer!=null">
+                and answer=#{answer}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addAnswer" parameterType="Answer">
+        insert into answer values (null,#{gradeid},#{subjectid},#{answer})
+    </insert>
+
+    <update id="updateAnswer" parameterType="Answer">
+        update answer set right=#{right } where id = #{id}
+    </update>
+
+    <delete id="deleteClasss" parameterType="Classs">
+        delete from classs where id = #{id}
+    </delete>
+
+    <select id="listAnswer" parameterType="int" resultType="Answer">
+        select * from grade where testid=#{0}
+    </select>
+
+</mapper>

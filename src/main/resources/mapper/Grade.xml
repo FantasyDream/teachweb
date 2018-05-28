@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teachweb.dao.GradeDao">
+    <select id="getGrade" resultType="Grade">
+        select * from grade
+        <where>
+            <if test="id!=0">
+                and id=#{id}
+            </if>
+            <if test="testid!=0">
+                and testid=#{testid}
+            </if>
+            <if test="studentid!=null">
+                and studentid=#{studentid}
+            </if>
+        </where>
+    </select>
+
+    <select id="listGrade" parameterType="int" resultType="Grade">
+        select * from grade where studentid = #{id}
+    </select>
+
+    <insert id="addGrade" parameterType="Grade">
+        insert into grade values (null,#{testid},#{studentid},#{grade})
+    </insert>
+
+    <update id="updateGrade" parameterType="Grade">
+        update parent set grade = #{grade}
+        where id=#{id}
+    </update>
+
+    <delete id="deleteGrade" parameterType="Grade">
+        delete from grade where id = #{id}
+    </delete>
+
+</mapper>

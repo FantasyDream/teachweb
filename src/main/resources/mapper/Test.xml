@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teachweb.dao.TestDao">
+    <select id="getTest" resultType="Test">
+        select * from test
+        <where>
+            <if test="id!=0">
+                and id=#{id}
+            </if>
+            <if test="name!=null">
+                and name=#{name}
+            </if>
+            <if test="classid!=0">
+                and classid=#{classid}
+            </if>
+        </where>
+    </select>
+
+    <select id="listTest" parameterType="int" resultType="Test">
+        select * from test where classid=#{0}
+    </select>
+
+    <insert id="addTest" parameterType="Test">
+        insert into test values (null,#{classid},#{name})
+    </insert>
+
+    <update id="updateTest" parameterType="Test">
+        update test set name=#{name} where id=#{id}
+    </update>
+
+    <delete id="deleteTest" parameterType="Test">
+        delete from test where id = #{id}
+    </delete>
+
+    <insert id="addSubject" parameterType="int">
+        insert into testlist values (null,#{0},#{1})
+    </insert>
+    <select id="listSubject" parameterType="int" resultType="Subjects">
+        select s.* from testlist t left outer join subjects s on t.subjectid = s.id where t.testid=#{0}
+    </select>
+</mapper>

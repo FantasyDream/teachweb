@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teachweb.dao.SubjectsDao">
+    <select id="getSubjects" resultType="Subjects">
+        select * from subjects
+        <where>
+            <if test="id!=0">
+                and id=#{id}
+            </if>
+            <if test="expression!=null">
+                and expression=#{expression}
+            </if>
+            <if test="answer!=null">
+                and answer=#{answer}
+            </if>
+        </where>
+    </select>
+
+    <select id="listSubjects" parameterType="int" resultType="Subjects">
+        select * from subjects where id=#{testId}
+    </select>
+
+    <insert id="addSubjects" parameterType="Subjects">
+        insert into subjects values (null,#{expression},#{answer})
+    </insert>
+
+    <update id="updateSubjects" parameterType="Subjects">
+        update student set answer=#{answer} where id=#{id}
+    </update>
+
+    <delete id="deleteSubjects" parameterType="Subjects">
+        delete from subjects
+        <where>
+            <if test="id!=0">
+                and id=#{id}
+            </if>
+            <if test="expression!=null">
+                and expression=#{expression}
+            </if>
+        </where>
+    </delete>
+
+    <select id="getLastInsertId" resultType="int">
+        select LAST_INSERT_ID()
+    </select>
+</mapper>

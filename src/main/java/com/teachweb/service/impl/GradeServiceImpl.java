@@ -25,8 +25,8 @@ public class GradeServiceImpl implements GradeService {
     TestDao testDao;
 
     @Override
-    public void getGrade(Grade grade) {
-        gradeDao.getGrade(grade);
+    public Grade getGrade(Grade grade) {
+        return gradeDao.getGrade(grade);
     }
 
     @Override

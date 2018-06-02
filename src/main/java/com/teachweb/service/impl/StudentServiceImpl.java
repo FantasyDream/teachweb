@@ -1,9 +1,9 @@
 package com.teachweb.service.impl;
 
-import com.teachweb.dao.ClasssDao;
-import com.teachweb.dao.StudentDao;
-import com.teachweb.model.Classs;
-import com.teachweb.model.Student;
+import com.teachweb.dao.*;
+import com.teachweb.model.*;
+import com.teachweb.service.AnswerService;
+import com.teachweb.service.GradeService;
 import com.teachweb.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +20,15 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private ClasssDao classsDao;
+
+    @Autowired
+    private GradeService gradeDao;
+
+    @Autowired
+    private AnswerDao answerDao;
+
+    @Autowired
+    private TestDao testDao;
 
     @Override
     public void addStudent(Student student) {
@@ -58,4 +67,28 @@ public class StudentServiceImpl implements StudentService {
         int classsId = (int) classsDao.getClasss(classs).getId();
         studentDao.joinClasss(classsId,studentId);
     }
+
+    @Override
+    public List<Classs> listClasss(int studentId) {
+        return studentDao.listClasss(studentId);
+    }
+
+    @Transactional(propagation=Propagation.REQUIRED,rollbackForClassName="Exception")
+    public void addAnswers(Test test,String[] anwsers,int studentId){
+        Grade grade = new Grade();
+        grade.setStudentid(studentId);
+        grade.setTestid(test.getId());
+        gradeDao.addGrade(grade);
+        grade = gradeDao.getGrade(grade);
+        List<Subjects> subjects = testDao.listSubject(test.getId());
+        for (int i = 0; i < subjects.size(); i++) {
+            Answer answer = new Answer();
+            answer.setGradeid(grade.getId());
+            answer.setSubjectid(subjects.get(i).getId());
+            answer.setAnswer(anwsers[i]);
+            answerDao.addAnswer(answer);
+        }
+        gradeDao.calculateGrade(grade);
+    }
+
 }

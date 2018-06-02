@@ -44,4 +44,10 @@ public class ParentServiceImpl implements ParentService {
     public void addChildren(Parent parent, Student student) {
         parentDao.addChildren((int)parent.getId(), (int)student.getId());
     }
+
+    @Override
+    public List<Student> listStudent(int parentId) {
+        return parentDao.listStudent(parentId);
+    }
+
 }

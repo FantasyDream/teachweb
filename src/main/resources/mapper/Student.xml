@@ -49,4 +49,8 @@
     <insert id="joinClasss" parameterType="int">
         insert into classlist values (null,#{0},#{1})
     </insert>
+
+    <select id="listClasss" parameterType="int" resultType="Classs">
+        select c2.* from classlist c1 left outer join classs c2 on c1.classid = c2.id where studentid=#{0}
+    </select>
 </mapper>

@@ -1,6 +1,7 @@
 package com.teachweb.dao;
 
 import com.teachweb.model.Parent;
+import com.teachweb.model.Student;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface ParentDao {
     void updateParent(Parent parent);
 
     void addChildren(int parentId,int studentId);
+
+    List<Student> listStudent(int parentId);
 }

@@ -18,4 +18,6 @@ public interface ParentService {
     void updateParent(Parent parent);
 
     void addChildren(Parent parent, Student student);
+
+    List<Student> listStudent(int parentId);
 }

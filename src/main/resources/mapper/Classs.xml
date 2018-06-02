@@ -40,4 +40,5 @@
         select s.* from classlist c left outer join student s on c.studentid = s.id where c.classid=#{id}
     </select>
 
+
 </mapper>

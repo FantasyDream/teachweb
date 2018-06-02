@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface GradeService {
 
-    void getGrade(Grade grade);
+    Grade getGrade(Grade grade);
 
     void addGrade(Grade grade);
 

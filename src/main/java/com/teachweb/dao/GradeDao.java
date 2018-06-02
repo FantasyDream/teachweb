@@ -6,7 +6,7 @@ import com.teachweb.model.Grade;
 import java.util.List;
 
 public interface GradeDao {
-    void getGrade(Grade grade);
+    Grade getGrade(Grade grade);
 
     void addGrade(Grade grade);
 

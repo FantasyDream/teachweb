@@ -41,4 +41,8 @@
     <insert id="addChildren" parameterType="int">
         insert into relationship values (null,#{0},#{1})
     </insert>
+
+    <select id="listStudent" parameterType="int" resultType="Student">
+        select s.* from relationship r left outer  join student s on r.studentid = s.id where parentid = #{0};
+    </select>
 </mapper>

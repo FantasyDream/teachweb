@@ -61,7 +61,6 @@ public class NumTree {
 			if (Expression.isOperator(ob.toString())) {
 				NumTree t2 = (NumTree) stack.pop();
 				NumTree t1 = (NumTree) stack.pop();
-				
 					if (NumTree.max(t1, t2)) {
 						t.setData(ob.toString());
 						t.setLeft(t1);

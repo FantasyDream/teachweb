@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TeacherDao {
 
-    void addTeacher(Teacher teacher);
+    int addTeacher(Teacher teacher);
 
     void deleteTeacher(Teacher teacher);
 

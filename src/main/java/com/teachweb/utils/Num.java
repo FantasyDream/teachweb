@@ -87,7 +87,7 @@ public class Num {
 			n.setNumerator(a*c);
 			n.setDenomenator(b*d);
 			break;
-		case "/":
+		case "÷":
 			if (c == 0) {
 				n = new Num(0, 0);
 				break;

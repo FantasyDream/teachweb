@@ -33,7 +33,7 @@
     </delete>
 
     <select id="listAnswer" parameterType="int" resultType="Answer">
-        select * from grade where testid=#{0}
+        select * from answer where gradeid=#{0}
     </select>
 
 </mapper>

@@ -51,10 +51,11 @@ public class GradeServiceTest {
 
     @Test
     public void listGrade() {
-        List<Grade> grades = gradeService.listGrade(11);
-        Iterator<Grade> iterator = grades.iterator();
+        List<com.teachweb.model.Test> grades = gradeService.listGradeByStudent(1);
+        System.out.println(grades.size());
+        Iterator<com.teachweb.model.Test> iterator = grades.iterator();
         while(iterator.hasNext()){
-            System.out.println(iterator.next().getId());
+            System.out.println(iterator.next().getGrade());
         }
     }
 

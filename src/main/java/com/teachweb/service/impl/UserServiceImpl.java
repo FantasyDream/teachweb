@@ -82,6 +82,7 @@ public class UserServiceImpl implements UserService {
             case "student":
                 Student student = new Student();
                 student.setPhone(user.getPhone());
+                student.setPassword(user.getPassword());
                 if (studentDao.getStudent(student)==null) {
                     return false;
                 }
@@ -106,28 +107,66 @@ public class UserServiceImpl implements UserService {
             case "teacher":
                 Teacher teacher = new Teacher();
                 teacher.setPhone(user.getPhone());
-                if(teacherDao.getTeacher(teacher)==null){
+                if((teacher=teacherDao.getTeacher(teacher))==null){
                     return false;
                 }
+                user.setName(teacher.getName());
+                user.setId(teacher.getId());
                 break;
             case "student":
                 Student student = new Student();
                 student.setPhone(user.getPhone());
-                if (studentDao.getStudent(student)==null) {
+                if ((student=studentDao.getStudent(student))==null) {
                     return false;
                 }
+                user.setId(student.getId());
+                user.setName(student.getName());
                 break;
             case "parent":
                 Parent parent = new Parent();
                 parent.setPhone(user.getPhone());
-                if(parentDao.getParent(parent)==null){
+                if((parent=parentDao.getParent(parent))==null){
                     return false;
                 }
+                user.setId(parent.getId());
+                user.setName(parent.getName());
                 break;
             default:
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void updatePassword(User user) {
+        switch (user.getType()){
+            case "teacher":
+                Teacher teacher = new Teacher();
+                teacher.setId(user.getId());
+                teacher.setName(user.getName());
+                teacher.setPhone(user.getPhone());
+                teacher.setPassword(user.getPassword());
+                teacherDao.updateTeacher(teacher);
+                break;
+            case "student":
+                Student student = new Student();
+                student.setId(user.getId());
+                student.setName(user.getName());
+                student.setPhone(user.getPhone());
+                student.setPassword(user.getPassword());
+                studentDao.updateStudent(student);
+                break;
+            case "parent":
+                Parent parent = new Parent();
+                parent.setId(user.getId());
+                parent.setName(user.getName());
+                parent.setPhone(user.getPhone());
+                parent.setPassword(user.getPassword());
+                parentDao.updateParent(parent);
+                break;
+            default:
+                break;
+        }
     }
 
 }

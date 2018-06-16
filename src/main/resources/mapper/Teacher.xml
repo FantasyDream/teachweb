@@ -39,6 +39,6 @@
     </delete>
 
     <select id="listClasss" parameterType="int" resultType="Classs">
-        select * from classs where id=#{id}
+        select * from classs where teacherid=#{id}
     </select>
 </mapper>

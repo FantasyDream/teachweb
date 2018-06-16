@@ -148,7 +148,7 @@ public class Expression {
 			o = "*";
 			break;
 		case 3:
-			o = "/";
+			o = "÷";
 			break;
 		default:
 			o = "+";
@@ -158,7 +158,7 @@ public class Expression {
 	}
 
 	public static boolean isOperator(String o) {
-		if (o.equals("+") || o.equals("-") || o.equals("*") || o.equals("/") || o.equals("(") || o.equals(")")) {
+		if (o.equals("+") || o.equals("-") || o.equals("*") || o.equals("÷") || o.equals("(") || o.equals(")")) {
 			return true;
 		} else {
 			return false;
@@ -168,7 +168,7 @@ public class Expression {
 
 	public static boolean priority(String operatorout, String operatorin) {
 		int m = -1, n = -1;
-		String o[] = { "+", "-", "*", "/", "(", ")" };
+		String o[] = { "+", "-", "*", "÷", "(", ")" };
 		int first[][] = { { 1, 1, 2, 2, 2, 0 }, { 1, 1, 2, 2, 2, 0 }, { 1, 1, 1, 1, 2, 0 }, { 1, 1, 1, 1, 2, 0 },
 				{ 2, 2, 2, 2, 2, 0 }, { 2, 2, 2, 2, 2, 2 } };
 		for (int i = 0; i < 6; i++) {

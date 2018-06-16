@@ -3,9 +3,7 @@ package com.teachweb.service.impl;
 import com.teachweb.dao.AnswerDao;
 import com.teachweb.dao.GradeDao;
 import com.teachweb.dao.TestDao;
-import com.teachweb.model.Answer;
-import com.teachweb.model.Grade;
-import com.teachweb.model.Subjects;
+import com.teachweb.model.*;
 import com.teachweb.service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,8 +43,12 @@ public class GradeServiceImpl implements GradeService {
     }
 
     @Override
-    public List<Grade> listGrade(int studentId) {
-        return gradeDao.listGrade(studentId);
+    public List<Test> listGradeByStudent(int classId) {
+        return gradeDao.listGradeByStudent(classId);
+    }
+
+    public List<Student> listGradeByTest(int testId) {
+        return gradeDao.listGradeByTest(testId);
     }
 
     @Override

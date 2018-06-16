@@ -22,8 +22,8 @@ public class TeacherDaoTest {
         Teacher teacher = new Teacher();
         teacher.setName("张三");
         teacher.setPassword("123456");
-        teacher.setPhone("15356846611");
-        dao.addTeacher(teacher);
+        teacher.setPhone("13242342342");
+        System.out.println(dao.addTeacher(teacher));
     }
 
     @Test

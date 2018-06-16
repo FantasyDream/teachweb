@@ -10,4 +10,6 @@ public interface UserService {
 
     boolean exist(User user);
 
+    void updatePassword(User user);
+
 }

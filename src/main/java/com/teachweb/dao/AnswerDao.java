@@ -10,7 +10,7 @@ public interface AnswerDao {
 
     void deleteAnswer(Answer answer);
 
-    void updateAnswer(Answer answer);
+    int updateAnswer(Answer answer);
 
     Answer getAnswer(Answer answer);
 

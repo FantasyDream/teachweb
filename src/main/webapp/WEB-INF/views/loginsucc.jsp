@@ -1,16 +1,16 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: FantasyDream
-  Date: 2018/5/23
-  Time: 17:43
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-${message}
+${sessionScope.login.name}
+<c:if test="${sessionScope.login.type=='student'}">
+    <meta http-equiv="refresh" content="0;url=student/listClass" />
+</c:if>
+<c:if test="${sessionScope.login.type=='teacher'}">
+    <meta http-equiv="refresh" content="0;url=teacher/listClass" />
+</c:if>
 </body>
 </html>

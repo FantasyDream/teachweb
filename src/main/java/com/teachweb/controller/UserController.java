@@ -51,15 +51,28 @@ public class UserController {
     @RequestMapping("/offline")
     public ModelAndView offline(User user,HttpSession session){
         session.invalidate();
-        ModelAndView modelAndView=new ModelAndView("offlinesucc");
+        ModelAndView modelAndView=new ModelAndView("redirect:login.jsp");
         return modelAndView;
     }
 
+    @RequestMapping("/userMessage")
+    public String userMessage(){
+        return "userMessage";
+    }
 
-    @ResponseBody
-    @RequestMapping("/test")
-    public String off(){
-        return "hello world";
+    @RequestMapping("/updatePassword")
+    public String updatePassword(){
+        return "updatePassword";
+    }
+
+    @RequestMapping("/updatePasswordAction")
+    public String updatePasswordAction(String oldPassword,String newPassword,HttpSession session){
+        User login = (User)session.getAttribute("login");
+        if(login.getPassword().equals(oldPassword)){
+            login.setPassword(newPassword);
+            userService.updatePassword(login);
+        }
+        return "userMessage";
     }
 
 }

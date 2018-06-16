@@ -69,7 +69,7 @@ public class ParentController {
         model.addAttribute("student",student);
         model.addAttribute("tests",tests);
         model.addAttribute("grades",grades);
-        return "listTest";
+        return "teacher/listTest";
     }
 
     @RequestMapping("/listSubjects")
@@ -84,10 +84,10 @@ public class ParentController {
         grade.setTestid(testId);
         grade.setStudentid(studentId);
         if (gradeService.getGrade(grade)!=null){
-            List<Grade> grades= gradeService.listGrade(studentId);
+            List<Test> grades= gradeService.listGradeByStudent(studentId);
             model.addAttribute("grades",grades);
         }
-        return "listSubjects";
+        return "teacher/listSubject";
     }
 
 }

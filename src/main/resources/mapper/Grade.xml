@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.teachweb.dao.GradeDao">
+    <resultMap id="studentBean" type="Student">
+        <id column="id" property="id"></id>
+        <result property="name" column="name"/>
+        <result column="phone" property="phone"/>
+        <result column="grade" property="grade"/>
+    </resultMap>
+
+    <resultMap id="testBean" type="Test">
+        <id column="tid" property="id"/>
+        <result column="name" property="name"/>
+        <result column="classid" property="classid"/>
+
+        <association property="grade" javaType="Grade">
+            <id column="gid" property="id"/>
+            <result column="testid" property="testid"/>
+            <result column="studentid" property="studentid"/>
+            <result column="grade" property="grade"/>
+        </association>
+    </resultMap>
+
     <select id="getGrade" resultType="Grade">
         select * from grade
         <where>
@@ -16,8 +36,12 @@
         </where>
     </select>
 
-    <select id="listGrade" parameterType="int" resultType="Grade">
-        select * from grade where studentid = #{id}
+    <select id="listGradeByStudent" parameterType="int" resultMap="testBean">
+        select t.id 'tid',g.id 'gid',t.*,g.* from test t left outer join grade g on t.id = g.testid  where classid = #{0}
+    </select>
+
+    <select id="listGradeByTest" parameterType="int" resultMap="studentBean">
+        select s.*,g.grade 'grade' from grade g left outer join student s on g.studentid = s.id where testid = #{0}
     </select>
 
     <insert id="addGrade" parameterType="Grade">
